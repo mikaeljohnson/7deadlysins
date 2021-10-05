@@ -4,7 +4,9 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import i1 from "./assets/images/1.png";
+import i1 from "./assets/images/1.jpg";
+import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import Navbar from "./Navbar";
 
 export const StyledButton = styled.button`
   padding: 10px;
@@ -60,7 +62,7 @@ function App() {
     if (_amount <= 0) {
       return;
     }
-    setFeedback("Minting your Nerdy Coder Clone...");
+    setFeedback("Minting your 7 Deadly Sins Avatar...");
     setClaimingNft(true);
     blockchain.smartContract.methods
       .mint(blockchain.account, _amount)
@@ -77,7 +79,7 @@ function App() {
       })
       .then((receipt) => {
         setFeedback(
-          "WOW, you now own a Nerdy Coder Clone. go visit Opensea.io to view it."
+          "WOW, you now own a 7 Deadly Sins Avatar. go visit Opensea.io to view it."
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -95,12 +97,23 @@ function App() {
   }, [blockchain.account]);
 
   return (
-    <s.Screen style={{ backgroundColor: "var(--black)" }}>
+    <div>
+        {/* <Navbar account={blockchain.account} /> */}
+
+      <Router>
+            <Switch>
+            <Route path="/story" exact>
+            <Navbar/>
+            <div> </div>
+            <div id="loader" className="text-center mt-5"><center>Loading...</center></div>
+            </Route>
+            <Route path="/">
+            <s.Screen style={{ backgroundColor: "var(--black)" }}>
       <s.Container flex={1} ai={"center"} style={{ padding: 24 }}>
         <s.TextTitle
           style={{ textAlign: "center", fontSize: 28, fontWeight: "bold" }}
         >
-          Mint a Nerdy Coder Clone
+          Mint a 7 Deadly Sins Avatar
         </s.TextTitle>
         <s.SpacerMedium />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }}>
@@ -139,11 +152,11 @@ function App() {
             ) : (
               <>
                 <s.TextTitle style={{ textAlign: "center" }}>
-                  1 NCC costs 100 MATIC.
+                  1 7DS Avatar costs 100 Matic.
                 </s.TextTitle>
                 <s.SpacerXSmall />
                 <s.TextDescription style={{ textAlign: "center" }}>
-                  Excluding gas fee.
+                  (Excluding gas fee)
                 </s.TextDescription>
                 <s.SpacerSmall />
                 <s.TextDescription style={{ textAlign: "center" }}>
@@ -208,6 +221,15 @@ function App() {
         </s.Container>
       </s.Container>
     </s.Screen>
+            </Route>
+            
+           
+            
+    
+    </Switch>
+            </Router>
+    </div> 
+    
   );
 }
 
