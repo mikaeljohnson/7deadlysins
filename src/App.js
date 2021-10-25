@@ -68,9 +68,9 @@ function App() {
       .mint(blockchain.account, _amount)
       .send({
         gasLimit: "285000",
-        to: "0x827acb09a2dc20e39c9aad7f7190d9bc53534192",
+        to: "0x2dB45454f3063A33168Ff421e2b07b419fac9861",
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((100 * _amount).toString(), "ether"),
+        value: blockchain.web3.utils.toWei((250000000 * _amount).toString(), "gwei"),
       })
       .once("error", (err) => {
         console.log(err);
@@ -140,10 +140,10 @@ function App() {
                 </s.TextTitle>
                 <s.SpacerSmall />
                 <s.TextDescription style={{ textAlign: "center" }}>
-                  You can still find Nerdy Coder Clones on{" "}
+                  You can still find 7 Deadly Sins on{" "}
                   <a
                     target={"_blank"}
-                    href={"https://opensea.io/collection/nerdy-coder-clones"}
+                    href={"https://opensea.io/collection/7-deadly-sins"}
                   >
                     Opensea.io
                   </a>
@@ -152,7 +152,7 @@ function App() {
             ) : (
               <>
                 <s.TextTitle style={{ textAlign: "center" }}>
-                  1 7DS Avatar costs 100 Matic.
+                  1 7DS Avatar costs 0.25 Ether
                 </s.TextTitle>
                 <s.SpacerXSmall />
                 <s.TextDescription style={{ textAlign: "center" }}>
@@ -167,7 +167,7 @@ function App() {
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
                     <s.TextDescription style={{ textAlign: "center" }}>
-                      Connect to the Polygon network
+                      Connect to the Ethereum network
                     </s.TextDescription>
                     <s.SpacerSmall />
                     <StyledButton
@@ -209,7 +209,7 @@ function App() {
         <s.SpacerSmall />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
           <s.TextDescription style={{ textAlign: "center", fontSize: 9 }}>
-            Please make sure you are connected to the right network (Polygon
+            Please make sure you are connected to the right network (Ethereum
             Mainnet) and the correct address. Please note: Once you make the
             purchase, you cannot undo this action.
           </s.TextDescription>

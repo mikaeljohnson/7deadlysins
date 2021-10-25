@@ -1217,23 +1217,23 @@ abstract contract Ownable is Context {
     }
 }
 
-// File: contracts/NerdyCoderClones.sol
+// File: contracts/7DS.sol
 
 
 
-// Created by HashLips
-// The Nerdy Coder Clones
+// Created by MikaelJ
+// The 7 Deadly Sins
 
 pragma solidity ^0.8.0;
 
 
 
-contract NerdyCoderClones is ERC721Enumerable, Ownable {
+contract SevenDeadlySins is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
   string public baseURI;
   string public baseExtension = ".json";
-  uint256 public cost = 100 ether;
+  uint256 public cost = 250000000 gwei;
   uint256 public maxSupply = 1000;
   uint256 public maxMintAmount = 20;
   bool public paused = false;
