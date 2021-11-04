@@ -4,7 +4,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import i1 from "./assets/images/1.jpg";
+import i1 from "./assets/images/1.gif";
 import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Navbar from "./Navbar";
 
@@ -55,7 +55,7 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const [feedback, setFeedback] = useState("Maybe it's your lucky day.");
+  const [feedback, setFeedback] = useState("Maybe it's your lucky day. Purchase up to 5 of each sin released.");
   const [claimingNft, setClaimingNft] = useState(false);
 
   const claimNFTs = (_amount) => {
@@ -119,12 +119,19 @@ function App() {
         <ResponsiveWrapper flex={1} style={{ padding: 24 }}>
           <s.Container flex={1} jc={"center"} ai={"center"}>
             <StyledImg alt={"example"} src={i1} />
+            <s.SpacerXSmall />
+              <s.TextDescription style={{ textAlign: "center" }}>
+              (Premint examples)
+            </s.TextDescription>
             <s.SpacerMedium />
             <s.TextTitle
               style={{ textAlign: "center", fontSize: 35, fontWeight: "bold" }}
             >
-              {data.totalSupply}/1000
+              {data.totalSupply}/1000 
             </s.TextTitle>
+            <s.TextDescription style={{ textAlign: "center" }}>
+            Sloths Sinning
+            </s.TextDescription>
           </s.Container>
           <s.SpacerMedium />
           <s.Container
@@ -151,15 +158,23 @@ function App() {
               </>
             ) : (
               <>
-                <s.TextTitle style={{ textAlign: "center" }}>
-                  1 7DS Avatar costs 0.25 Ether
+                <s.TextTitle style={{ textAlign: "center", color: "magenta"}}>
+                  1 7DS Avatar costs 0.08 Ether
                 </s.TextTitle>
+                <s.SpacerXSmall />
+                <s.TextDescription style={{ textAlign: "center" }}>
+                Whitelist only first 6 hours 0.025 Ether
+                </s.TextDescription>
+                <s.SpacerXSmall />
+                <s.TextDescription style={{ textAlign: "center" }}>
+                Early Access first 12 hours 0.04 Ether
+                </s.TextDescription>
                 <s.SpacerXSmall />
                 <s.TextDescription style={{ textAlign: "center" }}>
                   (Excluding gas fee)
                 </s.TextDescription>
                 <s.SpacerSmall />
-                <s.TextDescription style={{ textAlign: "center" }}>
+                <s.TextDescription style={{ textAlign: "center", color: "gold" }}>
                   {feedback}
                 </s.TextDescription>
                 <s.SpacerMedium />
@@ -199,6 +214,46 @@ function App() {
                       }}
                     >
                       {claimingNft ? "BUSY" : "BUY 1"}
+                    </StyledButton>
+                    <StyledButton
+                      disabled={claimingNft ? 1 : 0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        claimNFTs(2);
+                        getData();
+                      }}
+                    >
+                      {claimingNft ? "BUSY" : "BUY 2"}
+                    </StyledButton>
+                    <StyledButton
+                      disabled={claimingNft ? 1 : 0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        claimNFTs(3);
+                        getData();
+                      }}
+                    >
+                      {claimingNft ? "BUSY" : "BUY 3"}
+                    </StyledButton>
+                    <StyledButton
+                      disabled={claimingNft ? 1 : 0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        claimNFTs(4);
+                        getData();
+                      }}
+                    >
+                      {claimingNft ? "BUSY" : "BUY 4"}
+                    </StyledButton>
+                    <StyledButton
+                      disabled={claimingNft ? 1 : 0}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        claimNFTs(5);
+                        getData();
+                      }}
+                    >
+                      {claimingNft ? "BUSY" : "BUY 5"}
                     </StyledButton>
                   </s.Container>
                 )}
