@@ -162,10 +162,6 @@ function App() {
               </>
             ) : (
               <>
-                <s.TextTitle style={{ textAlign: "center", color: "magenta"}}>
-                  1 7DS Avatar costs 0.08 Ether
-                </s.TextTitle>
-                <s.SpacerXSmall />
                 <s.TextDescription style={{ textAlign: "center" }}>
                 Whitelist only first 6 hours 0.025 Ether
                 </s.TextDescription>
@@ -174,6 +170,12 @@ function App() {
                 Early Access first 12 hours 0.04 Ether
                 </s.TextDescription>
                 <s.SpacerXSmall />
+                <s.TextTitle style={{ textAlign: "center", color: "magenta"}}>
+                  1 7DS costs 0.08 Ether
+                </s.TextTitle>
+
+                <s.SpacerXSmall />
+
                 <s.TextDescription style={{ textAlign: "center" }}>
                   (Excluding gas fee)
                 </s.TextDescription>
