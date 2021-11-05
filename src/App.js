@@ -117,7 +117,7 @@ function App() {
         <s.TextTitle
           style={{ textAlign: "center", fontSize: 28, fontWeight: "bold" }}
         >
-          Mint a 7 Deadly Sins Avatar
+          Mint a 7DS by Manic
         </s.TextTitle>
         <s.SpacerMedium />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }}>
