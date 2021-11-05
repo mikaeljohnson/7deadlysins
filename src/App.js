@@ -7,6 +7,7 @@ import styled from "styled-components";
 import i1 from "./assets/images/1.gif";
 import { HashRouter as Router, Route, Switch, Link } from 'react-router-dom';
 import Navbar from "./Navbar";
+import Web3 from "web3";
 
 export const StyledButton = styled.button`
   padding: 10px;
@@ -72,9 +73,10 @@ function App() {
     blockchain.smartContract.methods
       .mint(blockchain.account, _amount)
       .send({
+        gas: Web3.utils.fromEther("0.004"),
         to: "0x7985388fdeE0ab9Fdd5e2aA20835dBF309b1a341",
         from: blockchain.account,
-        value: (25000000000000000 * _amount).toString(),
+        value: (80000000000000000 * _amount).toString(),
       })
       .once("error", (err) => {
         console.log(err);
