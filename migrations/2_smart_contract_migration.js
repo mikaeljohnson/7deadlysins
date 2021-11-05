@@ -1,5 +1,5 @@
-const SmartContract = artifacts.require("SevenDeadlySins");
+const SmartContract = artifacts.require("ManicMinter");
 
 module.exports = function (deployer) {
-  deployer.deploy(SmartContract, "Seven Deadly Sins", "$7DS", "ipfs://QmbPkwYNQn7t6CLAgFtvhPdvp3egGxeaQHBXA7s6tBF278/");
-};
+  deployer.deploy(SmartContract);
+}; 

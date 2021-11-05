@@ -55,22 +55,26 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const [feedback, setFeedback] = useState("Maybe it's your lucky day. Purchase up to 5 of each sin released.");
+  const [feedback, setFeedback] = useState("Welcome to purgatory. Purchase up to 5 of each sin released.");
   const [claimingNft, setClaimingNft] = useState(false);
-
+  
   const claimNFTs = (_amount) => {
     if (_amount <= 0) {
       return;
     }
     setFeedback("Minting your 7 Deadly Sins Avatar...");
     setClaimingNft(true);
+    let hour = new Date();
+
+    if(hour > 100){
+      console.log(hour);
+    }
     blockchain.smartContract.methods
       .mint(blockchain.account, _amount)
       .send({
-        gasLimit: "285000",
-        to: "0x2dB45454f3063A33168Ff421e2b07b419fac9861",
+        to: "0x7985388fdeE0ab9Fdd5e2aA20835dBF309b1a341",
         from: blockchain.account,
-        value: blockchain.web3.utils.toWei((250000000 * _amount).toString(), "gwei"),
+        value: (25000000000000000 * _amount).toString(),
       })
       .once("error", (err) => {
         console.log(err);

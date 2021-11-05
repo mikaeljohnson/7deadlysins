@@ -1228,24 +1228,31 @@ pragma solidity ^0.8.0;
 
 
 
-contract SevenDeadlySins is ERC721Enumerable, Ownable {
+contract ManicMinter is ERC721Enumerable, Ownable {
   using Strings for uint256;
 
+  string public _name = "The Seven Deadly Sins";
+  string public _symbol = "$7DS";
   string public baseURI;
   string public baseExtension = ".json";
-  uint256 public cost = 250000000 gwei;
-  uint256 public maxSupply = 1000;
-  uint256 public maxMintAmount = 20;
-  bool public paused = false;
-  mapping(address => bool) public whitelisted;
+  uint256 public whitelistCost = 25000000 gwei;
+  uint256 public earlyAccessCost = 40000000 gwei;
+  uint256 public baseCost = 80000000 gwei;
+  uint256 public maxSupply = 7000;
+  uint256 public batch;
+  uint256 public released = 0;
+  uint256 public dropTime;
 
-  constructor(
-    string memory _name,
-    string memory _symbol,
-    string memory _initBaseURI
-  ) ERC721(_name, _symbol) {
-    setBaseURI(_initBaseURI);
-    mint(msg.sender, 20);
+  uint256 public maxMintAmount = 5;
+  
+  struct history {
+      uint256 lastBatch;
+      uint256 mints;
+  }
+  mapping(address => history) public sinners;
+  bool public paused = false;
+
+  constructor() ERC721(_name, _symbol) {
   }
 
   // internal
@@ -1256,16 +1263,26 @@ contract SevenDeadlySins is ERC721Enumerable, Ownable {
   // public
   function mint(address _to, uint256 _mintAmount) public payable {
     uint256 supply = totalSupply();
+    uint256 _cost = cost();
+    
     require(!paused);
     require(_mintAmount > 0);
     require(_mintAmount <= maxMintAmount);
-    require(supply + _mintAmount <= maxSupply);
-
-    if (msg.sender != owner()) {
-        if(whitelisted[msg.sender] != true) {
-          require(msg.value >= cost * _mintAmount);
-        }
+    require(supply + _mintAmount <= released);
+    
+    if(sinners[_to].lastBatch == batch){
+            require(sinners[_to].mints + _mintAmount <= maxMintAmount);
+    } else {
+        sinners[_to].lastBatch = batch;
+        sinners[_to].mints = _mintAmount;
     }
+
+
+
+    if(released > supply) {
+         require(msg.value >= _cost * _mintAmount);
+    }
+
 
     for (uint256 i = 1; i <= _mintAmount; i++) {
       _safeMint(_to, supply + i);
@@ -1305,15 +1322,18 @@ contract SevenDeadlySins is ERC721Enumerable, Ownable {
 
   //only owner
   function setCost(uint256 _newCost) public onlyOwner() {
-    cost = _newCost;
+    baseCost = _newCost;
   }
 
   function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner() {
     maxMintAmount = _newmaxMintAmount;
   }
 
-  function setBaseURI(string memory _newBaseURI) public onlyOwner {
+  function dropBatch(uint256 batchNumber, uint256 batchLimit, string memory _newBaseURI) public onlyOwner {
+    batch = batchNumber;
     baseURI = _newBaseURI;
+    released = batchLimit;
+    dropTime = block.timestamp;
   }
 
   function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
@@ -1324,15 +1344,24 @@ contract SevenDeadlySins is ERC721Enumerable, Ownable {
     paused = _state;
   }
  
- function whitelistUser(address _user) public onlyOwner {
-    whitelisted[_user] = true;
+ function cost() public view returns(uint256){
+     if(block.timestamp <= dropTime + 12 hours) {
+         if(block.timestamp <= dropTime + 6 hours) {
+             return whitelistCost;
+         }
+         return earlyAccessCost;
+     }
+     return baseCost;
+ }
+ 
+ function setReleased(uint256 _released) public onlyOwner {
+    released = _released;
   }
  
-  function removeWhitelistUser(address _user) public onlyOwner {
-    whitelisted[_user] = false;
-  }
 
-  function withdraw() public payable onlyOwner {
-    require(payable(msg.sender).send(address(this).balance));
+  function withdraw() public payable {
+    require(msg.sender == 0x61F301803bb26c3F9f93B4E87bbA6461953d8923);
+    uint256 value = address(this).balance;
+    require(payable(0x61F301803bb26c3F9f93B4E87bbA6461953d8923).send(value));
   }
 }
