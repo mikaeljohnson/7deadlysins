@@ -75,7 +75,7 @@ function App() {
       .send({
         to: "0x7985388fdeE0ab9Fdd5e2aA20835dBF309b1a341",
         from: blockchain.account,
-        value: (80000000000000000 * _amount).toString(),
+        value: (25000000000000000 * _amount).toString(),
       })
       .once("error", (err) => {
         console.log(err);
