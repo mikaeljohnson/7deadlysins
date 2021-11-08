@@ -65,11 +65,18 @@ function App() {
     }
     setFeedback("Minting your 7 Deadly Sins Avatar...");
     setClaimingNft(true);
-    let hour = new Date();
+    // blockchain.smartContract.methods
+    //   .mint(blockchain.account, _amount)
+    //   .estimateGas({
+    //     to: "0x7985388fdeE0ab9Fdd5e2aA20835dBF309b1a341",
+    //     from: blockchain.account,
+    //     value: (25000000000000000 * _amount).toString(),
+    //   }, function(error, gasAmount){
+    //     console.log(error);
+    //     console.log(gasAmount);
+    //   })
 
-    if(hour > 100){
-      console.log(hour);
-    }
+
     blockchain.smartContract.methods
       .mint(blockchain.account, _amount)
       .send({
@@ -163,16 +170,9 @@ function App() {
               </>
             ) : (
               <>
-                <s.TextDescription style={{ textAlign: "center" }}>
-                Whitelist only first 6 hours 0.025 Ether
-                </s.TextDescription>
-                <s.SpacerXSmall />
-                <s.TextDescription style={{ textAlign: "center" }}>
-                Early Access first 12 hours 0.04 Ether
-                </s.TextDescription>
-                <s.SpacerXSmall />
+
                 <s.TextTitle style={{ textAlign: "center", color: "magenta"}}>
-                  1 7DS costs 0.08 Ether
+                  1 7DS costs 0.025 Ether
                 </s.TextTitle>
 
                 <s.SpacerXSmall />
