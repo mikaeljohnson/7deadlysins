@@ -56,7 +56,7 @@ function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
-  const [feedback, setFeedback] = useState("Welcome to purgatory. Purchase up to 5 of each sin released.");
+  const [feedback, setFeedback] = useState("Welcome to purgatory. Purchase up to 20 of each sin released.");
   const [claimingNft, setClaimingNft] = useState(false);
   
   const claimNFTs = (_amount) => {
@@ -82,7 +82,7 @@ function App() {
       .send({
         to: "0x7985388fdeE0ab9Fdd5e2aA20835dBF309b1a341",
         from: blockchain.account,
-        value: (25000000000000000 * _amount).toString(),
+        value: (10000000000000000 * _amount).toString(),
       })
       .once("error", (err) => {
         console.log(err);
@@ -172,7 +172,7 @@ function App() {
               <>
 
                 <s.TextTitle style={{ textAlign: "center", color: "magenta"}}>
-                  1 7DS costs 0.025 Ether
+                  1 7DS costs 0.01 Ether
                 </s.TextTitle>
 
                 <s.SpacerXSmall />
