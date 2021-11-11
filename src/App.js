@@ -139,7 +139,7 @@ function App() {
             <s.TextTitle
               style={{ textAlign: "center", fontSize: 35, fontWeight: "bold" }}
             >
-              {data.totalSupply}/1000 
+              {data.totalSupply}/666 
             </s.TextTitle>
             <s.TextDescription style={{ textAlign: "center" }}>
             Sloths Sinning
