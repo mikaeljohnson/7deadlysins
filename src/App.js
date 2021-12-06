@@ -142,7 +142,7 @@ function App() {
               {data.totalSupply}/666 
             </s.TextTitle>
             <s.TextDescription style={{ textAlign: "center" }}>
-            Sloths Sinning
+            7DS Sinning
             </s.TextDescription>
           </s.Container>
           <s.SpacerMedium />
@@ -172,7 +172,7 @@ function App() {
               <>
 
                 <s.TextTitle style={{ textAlign: "center", color: "magenta"}}>
-                  1 7DS costs 0.01 Ether
+                  1 7DS Pride costs 0.01 Ether
                 </s.TextTitle>
 
                 <s.SpacerXSmall />
@@ -242,7 +242,7 @@ function App() {
                     >
                       {claimingNft ? "BUSY" : "BUY 3"}
                     </StyledButton>
-                    <StyledButton
+                    {/* <StyledButton
                       disabled={claimingNft ? 1 : 0}
                       onClick={(e) => {
                         e.preventDefault();
@@ -261,7 +261,7 @@ function App() {
                       }}
                     >
                       {claimingNft ? "BUSY" : "BUY 5"}
-                    </StyledButton>
+                    </StyledButton> */}
                   </s.Container>
                 )}
               </>
